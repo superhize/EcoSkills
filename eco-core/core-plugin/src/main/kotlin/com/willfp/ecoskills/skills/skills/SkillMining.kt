@@ -4,7 +4,6 @@ import com.willfp.eco.core.integrations.afk.AFKManager
 import com.willfp.eco.util.BlockUtils
 import com.willfp.ecoskills.giveSkillExperience
 import com.willfp.ecoskills.skills.Skill
-import dev.lone.itemsadder.api.Events.CustomBlockBreakEvent
 import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
@@ -52,28 +51,6 @@ class SkillMining : Skill(
         val toGive = rewards[type] ?: return
 
         if (BlockUtils.isPlayerPlaced(event.block)) {
-            return
-        }
-
-        if (plugin.configYml.getBool("skills.prevent-levelling-while-afk") && AFKManager.isAfk(player)) {
-            return
-        }
-
-        player.giveSkillExperience(this, toGive)
-    }
-
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
-    fun handleLevelling(event: CustomBlockBreakEvent){
-        val type = event.namespacedID
-        val player = event.player
-
-        if(player.gameMode == GameMode.CREATIVE || player.gameMode == GameMode.SPECTATOR){
-            return
-        }
-
-        val toGive = iarewards[type] ?: return
-
-        if(BlockUtils.isPlayerPlaced(event.block)){
             return
         }
 
