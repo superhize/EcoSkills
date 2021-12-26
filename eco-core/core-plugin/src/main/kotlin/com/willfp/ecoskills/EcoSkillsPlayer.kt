@@ -142,31 +142,38 @@ fun OfflinePlayer.getStatLevel(stat: Stat): Int {
 }
 
 fun Player.getBonusStatLevel(stat: Stat): Int {
-    var i = 0.0
+    var added = 0.0
     for (modifier in this.getStatModifiers()) {
         if (modifier.stat == stat) {
             if (modifier.operation == ModifierOperation.ADD) {
-                i += modifier.amount
+                added += modifier.amount
             }
         }
     }
+    val base = this.getBaseStatLevel(stat)
+    var toMultiply = base + added
+
     for (modifier in this.getStatModifiers()) {
         if (modifier.stat == stat) {
             if (modifier.operation == ModifierOperation.MULTIPLY) {
-                i *= modifier.amount
+                toMultiply *= modifier.amount
             }
         }
     }
-    return i.toInt()
+    toMultiply -= base
+
+    return toMultiply.toInt()
 }
 
 fun OfflinePlayer.getBaseStatLevel(stat: Stat): Int {
     return PlayerProfile.load(this).read(stat.dataKey)
 }
 
-fun Player.setStatLevel(stat: Stat, level: Int) {
+fun OfflinePlayer.setStatLevel(stat: Stat, level: Int) {
     PlayerProfile.load(this).write(stat.dataKey, level)
-    stat.updateStatLevel(this)
+    if (this is Player) {
+        stat.updateStatLevel(this)
+    }
 }
 
 fun Entity.tryAsPlayer(): Player? {
