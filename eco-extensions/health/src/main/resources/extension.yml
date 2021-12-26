@@ -1,0 +1,4 @@
+name: Health
+main: com.willfp.ecoskills.health.HealthMain
+version: ${projectVersion}
+author: HiZe

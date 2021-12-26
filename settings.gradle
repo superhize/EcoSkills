@@ -7,3 +7,4 @@ include ':eco-core:core-plugin'
 // Extensions
 include ':eco-extensions'
 include ':eco-extensions:attackspeed'
+include ':eco-extensions:health'

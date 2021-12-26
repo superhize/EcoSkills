@@ -1,0 +1,4 @@
+name: '&#ff0000♥ Health'
+# The percent more speed to give for the attack speed attribute (internal in the game)
+# for each level
+health-per-level: 2

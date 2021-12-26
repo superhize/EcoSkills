@@ -7,19 +7,16 @@ import com.willfp.eco.core.data.keys.PersistentDataKeyType
 import com.willfp.eco.core.integrations.placeholder.PlaceholderEntry
 import com.willfp.eco.util.NumberUtils
 import com.willfp.eco.util.StringUtils
-import com.willfp.ecoskills.EcoSkillsPlugin
-import com.willfp.ecoskills.SkillObject
+import com.willfp.ecoskills.*
 import com.willfp.ecoskills.config.SkillConfig
 import com.willfp.ecoskills.effects.Effect
 import com.willfp.ecoskills.effects.Effects
-import com.willfp.ecoskills.getAverageSkillLevel
-import com.willfp.ecoskills.getSkillLevel
-import com.willfp.ecoskills.getTotalSkillLevel
 import com.willfp.ecoskills.stats.Stats
 import org.bukkit.Bukkit
 import org.bukkit.NamespacedKey
 import org.bukkit.entity.Player
 import org.bukkit.event.Listener
+import kotlin.math.ceil
 
 abstract class Skill(
     val id: String
@@ -102,6 +99,24 @@ abstract class Skill(
             { player -> NumberUtils.format(player.getAverageSkillLevel()) },
             true
         ).register()
+
+        PlaceholderEntry(
+            "progress_to_next_level_${id}",
+            { player -> NumberUtils.format((player.getSkillProgress(this) / this.getExpForLevel(player.getSkillLevel(this) + 1)) * 100) },
+            true
+        ).register()
+
+        PlaceholderEntry(
+            "xp_to_next_lvl_${id}",
+            {player -> this.getExpForLevel(player.getSkillLevel(this)+1).toString()},
+            true
+        ).register()
+
+        PlaceholderEntry(
+            "current_xp_${id}",
+            { player -> NumberUtils.format(player.getSkillProgress(this))},
+            true
+        )
 
         PlaceholderEntry(
             "total_skill_level",

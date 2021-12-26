@@ -49,6 +49,7 @@ public class EcoSkillsPlugin extends EcoPlugin {
         super(1351, 13052, "&#ff00ae", true);
         instance = this;
         effectsYml = new EffectsYml(this);
+
     }
 
     @Override
