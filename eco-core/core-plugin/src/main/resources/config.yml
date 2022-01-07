@@ -239,6 +239,17 @@ skills:
       enabled: true
       # The actionbar message that should be sent
       format: "&f%skill% &8| &9(%current_xp%/%required_xp%) &e+%gained_xp%"
+    boss-bar:
+      # If the boss bar should be used
+      enabled: false
+      # The boss bar message that should be sent
+      format: "&f%skill% &8| &9(%current_xp%/%required_xp%)"
+      # The color of the boss bar (from https://hub.spigotmc.org/javadocs/spigot/org/bukkit/boss/BarColor.html)
+      color: blue
+      # The style of the boss bar (from https://hub.spigotmc.org/javadocs/spigot/org/bukkit/boss/BarStyle.html)
+      style: solid
+      # How long the boss bar should last (in milliseconds)
+      duration: 2500
     sound:
       # If a sound should be played
       enabled: true
@@ -272,10 +283,14 @@ skills:
 stats:
   defense:
     name: "&#e884b0🛡 Defense"
+    # Disabled worlds
+    disabled-in-worlds: []
     # 100% halves the incoming damage
     percent-less-damage-per-level: 0.25
   strength:
     name: "&#db0000🗡 Strength"
+    # Disabled worlds
+    disabled-in-worlds: []
     # 100% is double damage
     percent-more-damage-per-level: 0.25
   crit_chance:
@@ -284,23 +299,37 @@ stats:
     chance-per-level: 1
   crit_damage:
     name: "&9☠ Crit Damage"
+    # Disabled worlds
+    disabled-in-worlds: []
     # The percent more damage to deal on crits for each level.
     percent-more-damage-per-level: 0.5
     # The amount more damage to deal on crits by default.
     base-percent-more: 50
   speed:
     name: "&#40ffe6✦ Speed"
+    # Disabled worlds
+    disabled-in-worlds: []
     # The percent more speed to give for the speed attribute (internal in the game)
     # for each level
     percent-faster-per-level: 1
   wisdom:
     name: "&#42f566✎ Wisdom"
+    # Disabled worlds
+    disabled-in-worlds: []
     # The percent more xp to gain from orbs for each level of the stat.
     percent-more-xp-gain: 1
   ferocity:
     name: "&#6b0000⫽ Ferocity"
+    # Disabled worlds
+    disabled-in-worlds: []
     # The percent chance to deal damage twice
     chance-per-level: 0.5
+  health:
+    name: "&c❤ Health"
+    # Disabled worlds
+    disabled-in-worlds: []
+    # The extra hp per level
+    health-per-level: 1
 
 damage-indicators:
   # Requires HolographicDisplays/GHolo/CMI to be installed

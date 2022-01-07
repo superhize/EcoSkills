@@ -14,6 +14,10 @@ class SkillArmory : Skill(
 ) {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun handleLevelling(event: EntityDamageByEntityEvent) {
+        if (this.config.getStrings("disabled-in-worlds").contains(event.entity.world.name)) {
+            return
+        }
+
         val player = event.entity
         if (player !is Player) {
             return
@@ -24,6 +28,10 @@ class SkillArmory : Skill(
         }
 
         if (plugin.configYml.getBool("skills.prevent-levelling-while-afk") && AFKManager.isAfk(player)) {
+            return
+        }
+
+        if (player.isBlocking) {
             return
         }
 
