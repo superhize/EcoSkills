@@ -73,5 +73,7 @@ public class Skills {
 
     static {
         update();
+
+
     }
 }

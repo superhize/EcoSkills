@@ -21,6 +21,7 @@ private val expMultiplierCache = mutableMapOf<UUID, Double>()
 private val plugin: EcoSkillsPlugin = EcoSkillsPlugin.getInstance()
 
 fun Player.getSkillExperienceMultiplier(): Double {
+
     if (expMultiplierCache.containsKey(this.uniqueId)) {
         return expMultiplierCache[this.uniqueId]!!
     }
@@ -29,21 +30,6 @@ fun Player.getSkillExperienceMultiplier(): Double {
 }
 
 private fun Player.cacheSkillExperienceMultiplier(): Double {
-    if (this.hasPermission("ecoskills.xpmultiplier.quadruple")) {
-        return 4.0
-    }
-
-    if (this.hasPermission("ecoskills.xpmultiplier.triple")) {
-        return 3.0
-    }
-
-    if (this.hasPermission("ecoskills.xpmultiplier.double")) {
-        return 2.0
-    }
-
-    if (this.hasPermission("ecoskills.xpmultiplier.50percent")) {
-        return 1.5
-    }
 
     val prefix = "ecoskills.xpmultiplier."
     for (permissionAttachmentInfo in this.effectivePermissions) {
